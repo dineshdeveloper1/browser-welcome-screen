@@ -1,5 +1,5 @@
 function setInitialRotationAngles() {
-  console.log('set ratation angles')
+  console.log('Time updated')
   const hourHand = document.querySelector('.hour');
   const minHand = document.querySelector('.minute');
   const secHand = document.querySelector('.seconds');
@@ -20,4 +20,9 @@ function setInitialRotationAngles() {
   minHand.setAttribute('transform', `rotate(${minAngle} 500 500)`);
   secHand.setAttribute('transform', `rotate(${secAngle} 500 500)`);
 }
-setInitialRotationAngles();
+
+setInitialRotationAngles(); 
+
+setInterval(() => {
+  setInitialRotationAngles();  
+}, 60000);
