@@ -1,0 +1,14 @@
+Generated with the built-in image generation tool.
+
+MORNING
+Use case: photorealistic-natural. Asset type: full-screen desktop wallpaper for a world-clock dashboard. Fresh sunrise over an alpine lake, soft golden sunlight touching the peaks, delicate morning mist above the water, pale blue sky, peaceful and luminous. Wide 16:9 landscape composition: layered alpine mountains across the middle, still lake in the lower half, a few pine trees at lower left, open uncluttered sky at both top corners for small overlaid widgets. Premium realistic landscape photography. Coordinated alpine-lake wallpaper collection. No text, logos, interface, borders, or watermark.
+
+AFTERNOON
+Use case: photorealistic-natural. Asset type: full-screen desktop wallpaper for a world-clock dashboard. Bright clear afternoon over an alpine lake, rich turquoise water, sunlit mountain peaks and deep green pines, crisp blue sky with a few soft clouds, natural vibrant daylight. Wide 16:9 landscape composition: layered alpine mountains across the middle, still lake in the lower half, a few pine trees at lower left, open uncluttered sky at both top corners for small overlaid widgets. Premium realistic landscape photography. Coordinated alpine-lake wallpaper collection. No text, logos, interface, borders, or watermark.
+
+EVENING
+Use case: photorealistic-natural. Asset type: full-screen desktop wallpaper for a world-clock dashboard. Sunset over an alpine lake, warm amber and rose light along the horizon, purple-blue mountains reflected in still water, a calm cinematic dusk. Wide 16:9 landscape composition: layered alpine mountains across the middle, still lake in the lower half, a few pine trees at lower left, open uncluttered sky at both top corners for small overlaid widgets. Premium realistic landscape photography. Coordinated alpine-lake wallpaper collection. No text, logos, interface, borders, or watermark.
+
+NIGHT
+Use case: photorealistic-natural. Asset type: full-screen desktop wallpaper for a world-clock dashboard. Deep moonlit night over an alpine lake, luminous silver moonlight on mountain ridges and water, subtle stars in a clear navy sky, dark pine silhouettes, calm and atmospheric. Wide 16:9 landscape composition: layered alpine mountains across the middle, still lake in the lower half, a few pine trees at lower left, open uncluttered sky at both top corners for small overlaid widgets. Premium realistic landscape photography. Coordinated alpine-lake wallpaper collection. No text, logos, interface, borders, or watermark.
+
