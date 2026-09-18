@@ -1,0 +1,107 @@
+* { box-sizing: border-box; }
+:root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #f5f7fa; background: #101923; --muted: #b9c6d4; --line: #ffffff1c; --glass: linear-gradient(145deg, #182939d9, #0d1b2bc9); --gold: #efca90; }
+body { margin: 0; min-height: 100svh; padding: 30px 32px; display: grid; grid-template-columns: minmax(0, 310px) minmax(0, 350px); justify-content: space-between; align-items: start; gap: 32px; background: linear-gradient(180deg, #06132342, #06132308 45%, #061323a6), var(--wallpaper, url('../images/wallpaper.png')) center / cover fixed no-repeat; }
+body[data-period="morning"] { --wallpaper: url('../images/wallpaper-morning.png'); }
+body[data-period="afternoon"] { --wallpaper: url('../images/wallpaper-afternoon.png'); }
+body[data-period="evening"] { --wallpaper: url('../images/wallpaper-evening.png'); }
+body[data-period="night"] { --wallpaper: url('../images/wallpaper-night.png'); }
+main { grid-column: 2; grid-row: 1; width: 100%; min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 18px; }
+h1, h2, h3, p { margin-top: 0; }
+.clock-card, .weather-panel { border: 1px solid #ffffff29; background: var(--glass); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); box-shadow: 0 16px 45px #00101d26, inset 0 1px 0 #ffffff0c; border-radius: 22px; }
+.daily-thought { text-align: center; padding: 0; color: #fff; text-shadow: 0 2px 12px #000b, 0 1px 3px #0008; }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; }
+.daily-thought blockquote { margin: 0 0 16px; color: #fff; font-family: Georgia, serif; font-size: 25px; line-height: 1.48; letter-spacing: -.35px; text-wrap: pretty; }
+.today-date { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(500px, calc(100% - 790px)); text-align: center; font-size: clamp(25px, 2.5vw, 36px); font-weight: 400; line-height: 1.5; color: #fff; text-shadow: 0 2px 16px #000a, 0 1px 4px #0009; }
+.clock-panel { padding: 0; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 0 4px; margin-bottom: 12px; text-shadow: 0 1px 8px #0008; }
+h1 { margin: 0; font-size: 14px; font-weight: 500; letter-spacing: .15px; }
+.live { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.live::before { content: ''; width: 5px; height: 5px; background: #9bd6bb; border-radius: 50%; }
+.clocks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.clock-card { --accent: var(--gold); text-align: center; padding: 16px 10px; min-width: 0; }
+.clock-card + .clock-card { --accent: #aac5f4; }
+.card-top { display: flex; justify-content: space-between; align-items: center; text-align: left; gap: 6px; }
+h2 { font-size: 17px; font-weight: 500; margin: 0; letter-spacing: -.35px; }
+.location { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
+.zone { font-size: 12px; letter-spacing: .5px; color: var(--accent); background: #ffffff07; padding: 4px 6px; border: 1px solid var(--line); border-radius: 5px; }
+.face { position: relative; width: min(110px, 100%); aspect-ratio: 1; margin: 15px auto 12px; border: 1px solid #dce2e8; border-radius: 50%; background: #fff; box-shadow: 0 5px 16px #0003, inset 0 0 0 4px #f4f6f8; }
+.tick { position: absolute; inset: 6px; transform: rotate(var(--angle)); }
+.tick::before { content: ''; display: block; width: 1px; height: 3px; margin: auto; background: #929eaa; }
+.tick.major::before { height: 7px; background: #344454; }
+.number { position: absolute; transform: translate(-50%, -50%); color: #253545; font-size: 11px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.hand { position: absolute; bottom: 50%; left: 50%; transform-origin: 50% 100%; border-radius: 4px; }
+.hour { width: 3px; height: 25%; margin-left: -1.5px; background: #1b2937; }
+.minute { width: 2px; height: 35%; margin-left: -1px; background: #1b2937; }
+.second { width: 1px; height: 39%; margin-left: -.5px; background: #bb6734; }
+.pin { position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; transform: translate(-50%, -50%); border-radius: 50%; background: #1b2937; }
+.digital { display: flex; align-items: baseline; justify-content: center; gap: 5px; white-space: nowrap; }
+.digital time { font-size: 27px; font-weight: 300; letter-spacing: -.8px; font-variant-numeric: tabular-nums; }
+.period { font-size: 12px; color: var(--accent); }
+.date { font-size: 12px; color: var(--muted); margin: 5px 0 7px; }
+.offset { font-size: 12px; color: #9aaebf; letter-spacing: .7px; }
+.weather-panel { grid-column: 1; grid-row: 1; width: 100%; margin: 0; padding: 18px; }
+.panel-heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.eyebrow { color: var(--muted); margin: 0 0 6px; font-size: 12px; }
+.panel-heading h2 { font-size: 17px; }
+.weather-main { display: flex; align-items: center; gap: 17px; margin: 17px 0; }
+.weather-temperature { font-size: 44px; font-weight: 300; letter-spacing: -2px; white-space: nowrap; }
+.weather-condition { font-size: 15px; margin: 0 0 5px; }
+.weather-feels { font-size: 12px; color: var(--muted); margin: 0; }
+.forecast { margin-top: 14px; }
+.forecast h3 { display: flex; justify-content: space-between; margin: 0 0 10px; font-size: 12px; font-weight: 500; }
+.forecast-list { display: grid; gap: 0; padding: 0; margin: 0; list-style: none; }
+.forecast-row { display: grid; grid-template-columns: 55px 1fr auto; align-items: center; gap: 8px; padding: 8px 0; font-size: 12px; }
+.forecast-row + .forecast-row { border-top: 1px solid #ffffff0b; }
+.forecast-row time { font: inherit; }
+.forecast-condition { color: var(--muted); line-height: 1.4; }
+.forecast-temperatures { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.forecast-low { color: #a4b5c6; }
+.panel-status { margin: 10px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.panel-source { font-size: 12px; color: #9eafbe; line-height: 1.5; margin: 5px 0 0; }
+a { color: inherit; text-underline-offset: 3px; }
+.icon-refresh { display: grid; place-items: center; flex-shrink: 0; width: 34px; height: 34px; padding: 6px; border: 1px solid transparent; border-radius: 50%; background: transparent; color: #c4d2df; cursor: pointer; transition: background .2s, color .2s; }
+.icon-refresh:hover { background: #ffffff0d; color: var(--gold); }
+.icon-refresh:disabled { opacity: .45; cursor: wait; }
+.icon-refresh svg { width: 20px; height: 20px; display: block; transition: transform .35s ease; }
+.icon-refresh:not(:disabled):hover svg { transform: rotate(45deg); }
+.icon-refresh:disabled svg { animation: refresh-spin 1.2s linear infinite; }
+@keyframes refresh-spin { to { transform: rotate(360deg); } }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.daily-intro { position: absolute; top: 32px; left: 50%; transform: translateX(-50%); width: min(440px, calc(100% - 790px)); display: grid; gap: 24px; }
+.greeting { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 0; width: 100%; text-align: center; font-size: clamp(24px, 2.6vw, 38px); font-weight: 300; letter-spacing: -1.2px; color: #fff; text-shadow: 0 2px 18px #0009; pointer-events: none; }
+@media (min-width: 761px) and (max-height: 820px) {
+  body { padding-top: 20px; }
+  .clock-panel { padding: 0; }
+  header { margin-bottom: 12px; }
+  .face { margin-top: 10px; margin-bottom: 8px; }
+  .weather-panel { padding: 14px 17px; margin-top: 0; }
+  .weather-main { margin: 10px 0; }
+  .weather-temperature { font-size: 36px; }
+  .forecast { margin-top: 10px; }
+  .forecast-row { padding: 6px 0; }
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .daily-intro { position: static; grid-column: 1 / -1; grid-row: 1; transform: none; width: min(440px, 100%); justify-self: center; }
+  .today-date { position: static; grid-column: 1 / -1; grid-row: 2; transform: none; width: 100%; justify-self: center; }
+  main { grid-row: 3; }
+  .weather-panel { grid-row: 3; }
+}
+@media (max-width: 760px) {
+  body { grid-template-columns: 1fr; padding: 20px 18px 100px; gap: 22px; }
+  .daily-intro { position: static; grid-column: 1; grid-row: 1; transform: none; width: min(350px, 100%); justify-self: center; gap: 18px; }
+  .daily-thought { width: 100%; padding: 0; }
+  .today-date { position: static; grid-column: 1; grid-row: 2; transform: none; width: 100%; font-size: 27px; }
+  .weather-panel { grid-column: 1; grid-row: 3; width: min(350px, 100%); justify-self: start; }
+  main { grid-column: 1; grid-row: 4; width: min(350px, 100%); justify-self: end; min-height: 0; }
+  .daily-thought blockquote { font-size: 23px; }
+  .greeting { position: static; grid-column: 1; grid-row: 1; transform: none; width: 100%; margin: 0; font-size: 28px; }
+}
+@media (max-width: 360px) {
+  .clock-card { padding: 14px 8px; }
+  .digital time { font-size: 23px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+.greeting-icon { display: inline-flex; width: 1em; height: 1em; flex-shrink: 0; color: var(--gold); filter: drop-shadow(0 2px 8px #0005); }
+.greeting-icon svg { width: 100%; height: 100%; }
+
+.country-flag { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: 28px; line-height: 1.15; letter-spacing: 0; }
