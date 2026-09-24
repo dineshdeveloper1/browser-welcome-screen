@@ -4,19 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A personal daily dashboard with world clocks, Charkhi Dadri weather, and a thought for the day.">
-  <title>Welcome page by Dinesh</title>
+  <title>Welcome</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23101420'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23eab976' stroke-width='2'/%3E%3Cpath d='M16 8v8l5 3' fill='none' stroke='%23eab976' stroke-width='2'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <aside class="left-panel-stack" aria-label="Weather and updates">
     <section class="weather-panel" aria-labelledby="weather-title">
       <div class="panel-heading"><div><h2 id="weather-title">Charkhi Dadri, Haryana</h2></div></div>
       <div id="weather-data" aria-busy="true">
-        <div class="weather-main"><span class="weather-temperature" id="weather-temp">—°C</span><div><p class="weather-condition" id="weather-condition">Loading…</p><p class="weather-feels" id="weather-feels">Feels like —</p></div></div>
+        <div class="weather-main"><span class="weather-temperature" id="weather-temp">—°C</span><div class="weather-summary"><span class="weather-condition-icon" id="weather-condition-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .4-8 6 6 0 0 0-11.2 1.8A3.2 3.2 0 0 0 7 18Z"></path></svg></span><div><p class="weather-condition" id="weather-condition">Loading…</p><p class="weather-feels" id="weather-feels">Feels like —</p></div></div></div>
       </div>
-      <section class="forecast" aria-labelledby="forecast-title"><h3 id="forecast-title">Next 3 days <span class="forecast-low">High / Low</span></h3><ul class="forecast-list" id="weather-forecast"><li class="panel-source">Loading forecast…</li></ul></section>
+      <div class="weather-details" id="weather-details" hidden>
+        <section class="hourly-forecast" aria-labelledby="hourly-title">
+          <h3 id="hourly-title">Today by hour</h3>
+          <ul class="hourly-list" id="weather-hourly"><li class="panel-source">Loading hourly forecast…</li></ul>
+        </section>
+        <section class="forecast" aria-labelledby="forecast-title"><h3 id="forecast-title">Next 7 days <span class="forecast-low">High / Low</span></h3><ul class="forecast-list" id="weather-forecast"><li class="panel-source">Loading forecast…</li></ul></section>
+      </div>
       <p class="panel-status" id="weather-status" role="status">Checking weather…</p>
+      <button class="weather-toggle" id="weather-toggle" type="button" aria-expanded="false" aria-controls="weather-details" aria-label="Show hourly and seven-day weather">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9 5 5 5-5"></path></svg>
+      </button>
     </section>
+    <section class="info-card" id="cricket-card" aria-labelledby="cricket-title">
+      <button class="info-card-toggle" type="button" aria-expanded="false" aria-controls="cricket-content">
+        <span class="info-card-title" id="cricket-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 4.5 5 5L9 20H4v-5Z"></path><path d="m12 7 5 5M4 20l4-4"></path><circle cx="19" cy="19" r="2"></circle></svg>Cricket</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9 5 5 5-5"></path></svg>
+      </button>
+      <div class="cricket-live-preview" id="cricket-live-preview" hidden></div>
+      <div class="info-card-content" id="cricket-content" hidden>
+        <section aria-label="India Men international matches">
+          <div class="cricket-tabs" role="tablist" aria-label="Match format">
+            <button class="cricket-tab is-active" id="cricket-tab-t20i" type="button" role="tab" aria-selected="true" aria-controls="cricket-upcoming" data-format="T20I">T20</button>
+            <button class="cricket-tab" id="cricket-tab-odi" type="button" role="tab" aria-selected="false" aria-controls="cricket-upcoming" data-format="ODI" tabindex="-1">ODI</button>
+            <button class="cricket-tab" id="cricket-tab-test" type="button" role="tab" aria-selected="false" aria-controls="cricket-upcoming" data-format="Test" tabindex="-1">Test</button>
+          </div>
+          <div class="upcoming-scroll">
+          <ul class="compact-list" id="cricket-upcoming" role="tabpanel" aria-labelledby="cricket-tab-t20i"></ul>
+          </div>
+        </section>
+        <p class="info-status" id="cricket-status" role="status"></p>
+      </div>
+    </section>
+    <section class="info-card" aria-labelledby="news-title">
+      <button class="info-card-toggle" type="button" aria-expanded="false" aria-controls="news-content">
+        <span class="info-card-title" id="news-title"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3M10 10h4v4h-4z"></path></svg>Technology News</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9 5 5 5-5"></path></svg>
+      </button>
+      <div class="info-card-content" id="news-content" hidden>
+        <ul class="compact-list news-list" id="news-list"><li class="panel-source">Open the card to load the latest news.</li></ul>
+        <p class="info-status" id="news-status" role="status"></p>
+      </div>
+    </section>
+  </aside>
   <main>
     <section class="clock-panel" aria-label="World clocks">
     <div class="clocks">
@@ -36,23 +77,24 @@
     <noscript><p>Please enable JavaScript to display the live clocks and weather.</p></noscript>
   </main>
   <div class="daily-intro">
-    <p class="greeting" id="greeting" aria-live="polite" aria-atomic="true"><span class="greeting-icon" id="greeting-icon" aria-hidden="true"></span><span id="greeting-text"></span></p>
+    <p class="greeting" id="greeting" aria-live="polite" aria-atomic="true"><span class="greeting-icon" id="greeting-icon" aria-hidden="true"></span><span class="greeting-copy"><span id="greeting-text"></span><span class="greeting-support" id="greeting-support"></span></span></p>
     <section class="daily-thought" aria-label="Thought of the day">
     <blockquote id="thought-text">Small steps, taken with care, can lead to meaningful change.</blockquote>
   </section>
+  </div>
+  <div class="google-search-area">
+    <form class="google-search" action="https://www.google.com/search" method="get" role="search">
+      <label class="visually-hidden" for="google-query">Search Google</label>
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 4 4"></path></svg>
+      <input id="google-query" name="q" type="search" placeholder="Search Google" autocomplete="off" required>
+      <button type="submit">Search</button>
+    </form>
   </div>
   <time class="today-date" id="thought-date" aria-label="Today’s date"></time>
   <script>
     const settings = [['india', 'Asia/Kolkata'], ['uk', 'Europe/London']];
     const clocks = settings.map(([id, timeZone]) => {
       const card = document.getElementById(id);
-      const face = card.querySelector('.face');
-      for (let i = 0; i < 60; i++) {
-        const tick = document.createElement('span');
-        tick.className = 'tick' + (i % 5 === 0 ? ' major' : '');
-        tick.style.setProperty('--angle', `${i * 6}deg`);
-        face.prepend(tick);
-      }
       return {
         id, card,
         clockFormat: new Intl.DateTimeFormat('en-GB', { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }),
@@ -96,6 +138,12 @@
       Evening: '<path d="M3 19h18M5 15a7 7 0 0 1 14 0M12 3v3M3 8l2 2M21 8l-2 2M12 10v6m-3-3 3 3 3-3"/>',
       Night: '<path d="M20.5 14a8.5 8.5 0 0 1-10.5-10.5A8.5 8.5 0 1 0 20.5 14Z"/><path d="M18 3v4M16 5h4"/>'
     };
+    const greetingMessages = {
+      Morning: ['Ready for a fresh start?', 'Make today meaningful.', 'A new day, a new beginning.', 'Start with something that matters.'],
+      Afternoon: ['Hope your day is going well.', 'Keep the momentum going.', 'Take a moment to reset.', 'Make the rest of today count.'],
+      Evening: ['Time to slow down.', 'Hope you had a good day.', 'Enjoy a peaceful evening.', 'Take a breath and unwind.'],
+      Night: ['Time to recharge.', 'Rest well for tomorrow.', 'Wishing you a peaceful night.', 'Let the day gently end.']
+    };
     function update() {
       const now = new Date();
       updateThought(now);
@@ -108,8 +156,12 @@
           if (document.body.dataset.period !== wallpaperPeriod) document.body.dataset.period = wallpaperPeriod;
           const greeting = document.getElementById('greeting-text');
           const message = `Good ${period}`;
-          if (greeting.textContent !== message) {
+          const support = document.getElementById('greeting-support');
+          const messageIndex = Number(thoughtDay.replaceAll('-', '')) % greetingMessages[period].length;
+          const supportMessage = greetingMessages[period][messageIndex];
+          if (greeting.textContent !== message || support.textContent !== supportMessage) {
             greeting.textContent = message;
+            support.textContent = supportMessage;
             document.getElementById('greeting-icon').innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${greetingIcons[period]}</svg>`;
           }
         }
@@ -134,9 +186,11 @@
   </script>
 
   <script>
-    const weatherEndpoint = 'https://api.open-meteo.com/v1/forecast?latitude=28.59166&longitude=76.27161&current=temperature_2m,apparent_temperature,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Asia%2FKolkata&forecast_days=4&timeformat=unixtime';
+    const weatherEndpoint = 'https://api.open-meteo.com/v1/forecast?latitude=28.59166&longitude=76.27161&current=temperature_2m,apparent_temperature,weather_code&hourly=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Asia%2FKolkata&forecast_days=8&timeformat=unixtime';
     const weatherStatus = document.getElementById('weather-status');
     const weatherData = document.getElementById('weather-data');
+    const weatherDetails = document.getElementById('weather-details');
+    const weatherToggle = document.getElementById('weather-toggle');
     let weatherLoading = false, weatherChecked = 0, weatherTime = null;
     const weatherTimeFormat = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' });
     function weatherDescription(code) {
@@ -156,13 +210,52 @@
       if ([96, 99].includes(code)) return 'Thunderstorm with hail';
       return 'Conditions unavailable';
     }
+    function weatherIcon(code) {
+      if (code === 0) return '<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"></path>';
+      if ([1, 2].includes(code)) return '<path d="M8 16H6a3 3 0 0 1-.5-6A5 5 0 0 1 15 9a3.5 3.5 0 0 1 1 6.9H8Z"></path><path d="M15 3v2M19.5 5.5 18 7M21 10h-2"></path>';
+      if ([3, 45, 48].includes(code)) return '<path d="M6 16h11a4 4 0 0 0 .4-8 6 6 0 0 0-11.2 2A3 3 0 0 0 6 16Z"></path><path d="M5 20h13"></path>';
+      if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return '<path d="M6 14h11a4 4 0 0 0 .4-8 6 6 0 0 0-11.2 2A3 3 0 0 0 6 14Z"></path><path d="m8 17-1 3M13 17l-1 3M18 17l-1 3"></path>';
+      if ([71, 73, 75, 77, 85, 86].includes(code)) return '<path d="M6 13h11a4 4 0 0 0 .4-8 6 6 0 0 0-11.2 2A3 3 0 0 0 6 13Z"></path><path d="M8 17h.01M13 19h.01M18 17h.01"></path>';
+      if ([95, 96, 99].includes(code)) return '<path d="M6 13h11a4 4 0 0 0 .4-8 6 6 0 0 0-11.2 2A3 3 0 0 0 6 13Z"></path><path d="m13 14-3 5h3l-2 3"></path>';
+      return '<path d="M7 18h10a4 4 0 0 0 .4-8 6 6 0 0 0-11.2 1.8A3.2 3.2 0 0 0 7 18Z"></path>';
+    }
     function weatherValue(value, unit) { return typeof value === 'number' && Number.isFinite(value) ? Math.round(value) + unit : '—'; }
+    function renderHourly(hourly, currentTime) {
+      const list = document.getElementById('weather-hourly');
+      const hourFormat = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: 'numeric' });
+      const dateKey = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' });
+      const today = dateKey.format(currentTime);
+      const rows = [];
+      for (let i = 0; i < (hourly?.time?.length || 0); i++) {
+        if (!Number.isFinite(hourly.time[i])) continue;
+        const date = new Date(hourly.time[i] * 1000);
+        if (dateKey.format(date) !== today) continue;
+        const row = document.createElement('li');
+        row.className = 'hourly-row';
+        const hour = document.createElement('time');
+        hour.dateTime = date.toISOString();
+        hour.textContent = hourFormat.format(date);
+        const temperature = document.createElement('strong');
+        temperature.textContent = weatherValue(hourly.temperature_2m?.[i], '°');
+        const condition = document.createElement('span');
+        condition.textContent = weatherDescription(hourly.weather_code?.[i]);
+        row.append(hour, temperature, condition);
+        rows.push(row);
+      }
+      list.replaceChildren(...rows);
+      if (!rows.length) {
+        const message = document.createElement('li');
+        message.className = 'panel-source';
+        message.textContent = 'Hourly forecast unavailable.';
+        list.append(message);
+      }
+    }
     function renderForecast(daily) {
       const list = document.getElementById('weather-forecast');
       const dayFormat = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'short', day: 'numeric' });
       const rows = [];
-      // Day zero is today; show tomorrow and the following two days.
-      for (let i = 1; i <= 3; i++) {
+      // Day zero is today; show the following seven days.
+      for (let i = 1; i <= 7; i++) {
         if (!Number.isFinite(daily?.time?.[i])) continue;
         const row = document.createElement('li');
         row.className = 'forecast-row';
@@ -183,7 +276,7 @@
         rows.push(row);
       }
       list.replaceChildren(...rows);
-      if (rows.length < 3) {
+      if (rows.length < 7) {
         const message = document.createElement('li');
         message.className = 'panel-source';
         message.textContent = rows.length ? 'Some forecast days are unavailable.' : 'Forecast unavailable.';
@@ -205,7 +298,9 @@
         if (!current || !Number.isFinite(current.temperature_2m) || !Number.isFinite(current.time)) throw new Error('Invalid weather');
         document.getElementById('weather-temp').textContent = weatherValue(current.temperature_2m, '°C');
         document.getElementById('weather-condition').textContent = weatherDescription(current.weather_code);
+        document.getElementById('weather-condition-icon').innerHTML = `<svg viewBox="0 0 24 24">${weatherIcon(current.weather_code)}</svg>`;
         document.getElementById('weather-feels').textContent = 'Feels like ' + weatherValue(current.apparent_temperature, '°C');
+        renderHourly(data.hourly, new Date(current.time * 1000));
         renderForecast(data.daily);
         weatherTime = new Date(current.time * 1000);
         weatherChecked = Date.now();
@@ -214,6 +309,8 @@
         weatherStatus.textContent = weatherTime ? 'Could not refresh. Showing weather from ' + weatherTimeFormat.format(weatherTime) + ' IST.' : 'Weather unavailable. Check your internet connection or use the page refresh icon.';
         if (!weatherTime) {
           document.getElementById('weather-condition').textContent = 'Unavailable';
+          document.getElementById('weather-condition-icon').innerHTML = `<svg viewBox="0 0 24 24">${weatherIcon(null)}</svg>`;
+          renderHourly(null, new Date());
           renderForecast(null);
         }
       } finally {
@@ -222,9 +319,371 @@
         weatherData.setAttribute('aria-busy', 'false');
       }
     }
+    weatherToggle.addEventListener('click', () => {
+      const expanded = weatherToggle.getAttribute('aria-expanded') !== 'true';
+      if (expanded) {
+        document.querySelectorAll('.info-card-toggle[aria-expanded="true"]').forEach(toggle => {
+          toggle.setAttribute('aria-expanded', 'false');
+          document.getElementById(toggle.getAttribute('aria-controls')).hidden = true;
+          toggle.closest('.info-card').classList.remove('is-expanded');
+        });
+      }
+      weatherToggle.setAttribute('aria-expanded', String(expanded));
+      weatherToggle.setAttribute('aria-label', expanded ? 'Hide detailed weather' : 'Show hourly and seven-day weather');
+      weatherDetails.hidden = !expanded;
+      weatherToggle.closest('.weather-panel').classList.toggle('is-expanded', expanded);
+    });
     refreshWeather();
     setInterval(() => { if (!document.hidden) refreshWeather(); }, 15 * 60 * 1000);
     document.addEventListener('visibilitychange', () => { if (!document.hidden && Date.now() - weatherChecked >= 15 * 60 * 1000) refreshWeather(); });
+  </script>
+  <script>
+    const cricketLiveEndpoint = 'https://r.jina.ai/http://www.cricbuzz.com/cricket-match/live-scores';
+    const cricketScheduleEndpoint = 'https://r.jina.ai/http://www.cricbuzz.com/cricket-team/india/2/schedule';
+    const newsFeed = 'https://news.google.com/rss/search?q=%28%22artificial%20intelligence%22%20OR%20AI%20OR%20%22information%20technology%22%20OR%20software%20OR%20cybersecurity%29%20when%3A1d&hl=en-IN&gl=IN&ceid=IN%3Aen';
+    let newsCache = null;
+    let cricketLoadedAt = 0;
+    let activeCricketFormat = 'T20I';
+    let cricketFixtures = { T20I: [], ODI: [], Test: [] };
+
+    async function fetchWithTimeout(url, type = 'json') {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 12000);
+      try {
+        const response = await fetch(url, { signal: controller.signal, credentials: 'omit', referrerPolicy: 'no-referrer' });
+        if (!response.ok) throw new Error('Request failed');
+        return type === 'json' ? response.json() : response.text();
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+
+    function createMessage(text) {
+      const message = document.createElement('p');
+      message.className = 'panel-source';
+      message.textContent = text;
+      return message;
+    }
+
+    function matchState(event) {
+      return event.fullStatus?.type?.state || event.status || '';
+    }
+
+    function parseCricbuzzMatches(markdown) {
+      const matches = new Map();
+      const linkPattern = /\]\((https?:\/\/www\.cricbuzz\.com\/live-cricket-scores\/([^\s)]+))\s+"([^"]+)"\)/g;
+      for (const match of markdown.matchAll(linkPattern)) {
+        const title = match[3].replace(/\s+/g, ' ').trim();
+        const teamsText = title.split(',')[0].trim();
+        const teams = teamsText.split(/\s+vs\s+/i).map(name => name.trim());
+        if (teams.length !== 2) continue;
+        const statusText = title.includes(' - ') ? title.split(' - ').slice(1).join(' - ').trim() : '';
+        const state = /preview|upcoming match/i.test(statusText) ? 'pre'
+          : /won|complete|abandon|draw|no result/i.test(statusText) ? 'post'
+          : 'in';
+        const event = {
+          id: match[2].split('/')[0],
+          link: match[1].replace('http://', 'https://'),
+          title,
+          name: title,
+          shortName: teamsText,
+          status: state,
+          summary: statusText || (state === 'in' ? 'Live' : 'Upcoming'),
+          competitors: teams.map(name => ({ displayName: name, score: '' }))
+        };
+        if (!matches.has(event.id) || statusText) matches.set(event.id, event);
+      }
+      return [...matches.values()];
+    }
+
+    function parseCricbuzzSchedule(markdown) {
+      const matches = [];
+      let fixtureDate = null;
+      for (const line of markdown.split('\n')) {
+        const dateHeading = line.match(/^\[[A-Za-z]{3},\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})(?:\s+-[^\]]+)?\]\(/);
+        if (dateHeading) {
+          fixtureDate = { day: Number(dateHeading[1]), month: dateHeading[2], year: Number(dateHeading[3]) };
+          continue;
+        }
+        if (!fixtureDate || !line.includes('/live-cricket-scores/')) continue;
+        const linkMatch = line.match(/\]\((https?:\/\/www\.cricbuzz\.com\/live-cricket-scores\/(\d+)\/[^\s)]+)\s+"([^"]+)"\)\s*$/);
+        if (!linkMatch) continue;
+        const title = linkMatch[3].replace(/\s+/g, ' ').trim();
+        const format = /\bT20I\b/i.test(title) ? 'T20I' : /\bODI\b/i.test(title) ? 'ODI' : /\bTest\b/i.test(title) ? 'Test' : '';
+        if (!format) continue;
+        const teamsText = title.split(',')[0].trim();
+        const teams = teamsText.split(/\s+vs\s+/i).map(name => name.trim());
+        if (teams.length !== 2 || !teams.some(name => /^India$/i.test(name))) continue;
+        if (teams.some(name => /women|under[- ]?19|u19|india a\b|academy|emerging/i.test(name))) continue;
+        const gmtTime = line.match(/(\d{1,2}):(\d{2})\s+(AM|PM)\s*\(GMT\)/i);
+        if (!gmtTime) continue;
+        let hour = Number(gmtTime[1]) % 12;
+        if (gmtTime[3].toUpperCase() === 'PM') hour += 12;
+        const month = new Date(`${fixtureDate.month} 1, 2000`).getMonth();
+        if (Number.isNaN(month)) continue;
+        const date = new Date(Date.UTC(fixtureDate.year, month, fixtureDate.day, hour, Number(gmtTime[2])));
+        const labelStart = line.slice(1, line.indexOf('![Image'));
+        const venue = labelStart.includes('•') ? labelStart.split('•').slice(1).join('•').trim() : '';
+        matches.push({
+          id: linkMatch[2],
+          link: linkMatch[1].replace('http://', 'https://'),
+          title,
+          name: title,
+          shortName: teamsText,
+          format,
+          date: date.toISOString(),
+          venue,
+          status: 'pre',
+          competitors: teams.map(name => ({ displayName: name, score: '' }))
+        });
+      }
+      return matches;
+    }
+
+    function matchFormat(event) {
+      if (event.format) return event.format;
+      const description = [event.class?.generalClassCard, event.class?.name, event.eventType, event.title, event.description].filter(Boolean).join(' ');
+      if (/\bT20I\b|Twenty20 International/i.test(description)) return 'T20I';
+      if (/\bODI\b|One-Day International/i.test(description)) return 'ODI';
+      if (/\bTest\b/i.test(description)) return 'Test';
+      return '';
+    }
+
+    function isIndiaMensInternational(event, leagueName = '') {
+      const teams = event.competitors || [];
+      const hasSeniorIndia = teams.some(team => {
+        const name = (team.displayName || team.name || team.location || '').trim();
+        return /^India$/i.test(name) || /^IND$/i.test(team.abbreviation || '');
+      });
+      const description = [leagueName, event.name, event.shortName, event.description, ...teams.map(team => team.displayName || team.name || '')].join(' ');
+      const excluded = /women|under[- ]?19|u19|india a\b|emerging|academy|domestic/i.test(description);
+      return hasSeniorIndia && !excluded && Boolean(matchFormat(event));
+    }
+
+    function renderMatches(container, events, upcoming = false) {
+      container.replaceChildren();
+      if (!events.length) {
+        container.append(createMessage(upcoming ? 'No upcoming India fixtures found.' : 'No India match is live right now.'));
+        return;
+      }
+      const dateFormat = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' });
+      for (const event of events) {
+        const item = document.createElement(upcoming ? 'li' : 'div');
+        item.className = 'match-card';
+        const link = document.createElement('a');
+        link.href = event.link || event.links?.find(entry => entry.href)?.href || 'https://www.espn.in/cricket/scores';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.className = 'match-card';
+        const competitors = event.competitors || [];
+        if (competitors.length) {
+          for (const team of competitors) {
+            const row = document.createElement('span');
+            row.className = 'match-teams';
+            const name = document.createElement('span');
+            name.textContent = team.displayName || team.name || 'Team';
+            const score = document.createElement('strong');
+            score.textContent = team.score || '—';
+            row.append(name, score);
+            link.append(row);
+          }
+        } else {
+          const name = document.createElement('span');
+          name.className = 'match-teams';
+          name.textContent = event.shortName || event.name || 'India match';
+          link.append(name);
+        }
+        const meta = document.createElement('span');
+        meta.className = 'match-meta';
+        const eventDate = new Date(event.date);
+        const format = matchFormat(event);
+        const detail = upcoming && !Number.isNaN(eventDate.getTime())
+          ? dateFormat.format(eventDate) + ' IST'
+          : event.fullStatus?.longSummary || event.summary || event.description || 'Live';
+        meta.textContent = (format ? format + ' · ' : '') + detail;
+        link.append(meta);
+        if (upcoming && event.venue) {
+          const venue = document.createElement('span');
+          venue.className = 'match-venue';
+          venue.textContent = event.venue;
+          link.append(venue);
+        }
+        item.append(link);
+        container.append(item);
+      }
+    }
+
+    function renderCricketFormat(format = activeCricketFormat) {
+      activeCricketFormat = format;
+      const container = document.getElementById('cricket-upcoming');
+      const selectedTab = document.querySelector(`.cricket-tab[data-format="${format}"]`);
+      document.querySelectorAll('.cricket-tab').forEach(tab => {
+        const selected = tab === selectedTab;
+        tab.classList.toggle('is-active', selected);
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+      });
+      container.setAttribute('aria-labelledby', selectedTab.id);
+      renderMatches(container, cricketFixtures[format].slice(0, 3), true);
+    }
+
+    async function loadCricket(force = false) {
+      if (!force && Date.now() - cricketLoadedAt < 5 * 60 * 1000) return;
+      const liveContainer = document.getElementById('cricket-live-preview');
+      const upcomingContainer = document.getElementById('cricket-upcoming');
+      const status = document.getElementById('cricket-status');
+      upcomingContainer.replaceChildren(createMessage('Loading fixtures…'));
+      status.textContent = '';
+      try {
+        const [liveMarkdown, scheduleMarkdown] = await Promise.all([
+          fetchWithTimeout(cricketLiveEndpoint, 'text'),
+          fetchWithTimeout(cricketScheduleEndpoint, 'text')
+        ]);
+        const live = parseCricbuzzMatches(liveMarkdown)
+          .filter(event => isIndiaMensInternational(event) && matchState(event) === 'in');
+        const upcoming = parseCricbuzzSchedule(scheduleMarkdown)
+          .filter(event => isIndiaMensInternational(event) && matchState(event) === 'pre')
+          .sort((a, b) => new Date(a.date) - new Date(b.date));
+        cricketFixtures = {
+          T20I: upcoming.filter(event => matchFormat(event) === 'T20I'),
+          ODI: upcoming.filter(event => matchFormat(event) === 'ODI'),
+          Test: upcoming.filter(event => matchFormat(event) === 'Test')
+        };
+        liveContainer.hidden = !live.length;
+        if (live.length) renderMatches(liveContainer, live.slice(0, 1));
+        else liveContainer.replaceChildren();
+        renderCricketFormat();
+        cricketLoadedAt = Date.now();
+        status.textContent = 'Scores and fixtures via Cricbuzz · Updated ' + new Intl.DateTimeFormat('en-IN', { hour: 'numeric', minute: '2-digit' }).format(new Date());
+      } catch {
+        liveContainer.hidden = true;
+        liveContainer.replaceChildren();
+        upcomingContainer.replaceChildren(createMessage('Upcoming fixtures could not be loaded.'));
+        status.textContent = 'Check your connection and reopen the card to retry.';
+      }
+    }
+
+    document.querySelectorAll('.cricket-tab').forEach(tab => {
+      tab.addEventListener('click', () => renderCricketFormat(tab.dataset.format));
+      tab.addEventListener('keydown', event => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const tabs = [...document.querySelectorAll('.cricket-tab')];
+        const current = tabs.indexOf(tab);
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (current + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        tabs[next].focus();
+        renderCricketFormat(tabs[next].dataset.format);
+      });
+    });
+
+    async function fetchNewsFeed(url) {
+      try {
+        const data = await new Promise((resolve, reject) => {
+          const callback = 'rssFeed' + Date.now() + Math.floor(Math.random() * 10000);
+          const script = document.createElement('script');
+          const cleanup = () => { delete window[callback]; script.remove(); };
+          const timeout = setTimeout(() => { cleanup(); reject(new Error('News request timed out')); }, 12000);
+          window[callback] = response => { clearTimeout(timeout); cleanup(); resolve(response); };
+          script.onerror = () => { clearTimeout(timeout); cleanup(); reject(new Error('News request failed')); };
+          script.src = 'https://api.rss2json.com/v1/api.json?callback=' + callback + '&rss_url=' + encodeURIComponent(url);
+          document.head.append(script);
+        });
+        if (data.status === 'ok' && Array.isArray(data.items)) {
+          return data.items.slice(0, 10).map(item => ({
+            title: item.title || 'Latest update',
+            link: item.link || 'https://news.google.com/',
+            source: item.author || 'Google News',
+            date: item.pubDate || ''
+          }));
+        }
+      } catch {}
+      let xml;
+      try {
+        xml = await fetchWithTimeout(url, 'text');
+      } catch {
+        xml = await fetchWithTimeout('https://api.allorigins.win/raw?url=' + encodeURIComponent(url), 'text');
+      }
+      const documentXml = new DOMParser().parseFromString(xml, 'application/xml');
+      if (documentXml.querySelector('parsererror')) throw new Error('Invalid news feed');
+      return [...documentXml.querySelectorAll('item')].slice(0, 10).map(item => ({
+        title: item.querySelector('title')?.textContent?.trim() || 'Latest update',
+        link: item.querySelector('link')?.textContent?.trim() || 'https://news.google.com/',
+        source: item.querySelector('source')?.textContent?.trim() || 'Google News',
+        date: item.querySelector('pubDate')?.textContent?.trim() || ''
+      }));
+    }
+
+    function renderNews(items) {
+      const list = document.getElementById('news-list');
+      list.replaceChildren();
+      if (!items.length) {
+        list.append(createMessage('No recent headlines found.'));
+        return;
+      }
+      const dateFormat = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' });
+      for (const story of items) {
+        const item = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = story.link;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = story.title;
+        const meta = document.createElement('span');
+        meta.className = 'news-meta';
+        const published = new Date(story.date);
+        meta.textContent = story.source + (Number.isNaN(published.getTime()) ? '' : ' · ' + dateFormat.format(published));
+        item.append(link, meta);
+        list.append(item);
+      }
+    }
+
+    async function loadNews() {
+      const list = document.getElementById('news-list');
+      const status = document.getElementById('news-status');
+      if (newsCache && Date.now() - newsCache.time < 15 * 60 * 1000) {
+        renderNews(newsCache.items);
+        status.textContent = 'Latest headlines via Google News.';
+        return;
+      }
+      list.replaceChildren(createMessage('Loading latest headlines…'));
+      status.textContent = '';
+      try {
+        const items = await fetchNewsFeed(newsFeed);
+        newsCache = { items, time: Date.now() };
+        renderNews(items);
+        status.textContent = 'Latest headlines via Google News.';
+      } catch {
+        list.replaceChildren(createMessage('News is temporarily unavailable.'));
+        status.textContent = 'Check your connection or select the tab again to retry.';
+      }
+    }
+
+    document.querySelectorAll('.info-card-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') !== 'true';
+        if (expanded) {
+          const weatherButton = document.getElementById('weather-toggle');
+          weatherButton.setAttribute('aria-expanded', 'false');
+          weatherButton.setAttribute('aria-label', 'Show hourly and seven-day weather');
+          document.getElementById('weather-details').hidden = true;
+          weatherButton.closest('.weather-panel').classList.remove('is-expanded');
+          document.querySelectorAll('.info-card-toggle[aria-expanded="true"]').forEach(other => {
+            if (other === toggle) return;
+            other.setAttribute('aria-expanded', 'false');
+            document.getElementById(other.getAttribute('aria-controls')).hidden = true;
+            other.closest('.info-card').classList.remove('is-expanded');
+          });
+        }
+        toggle.setAttribute('aria-expanded', String(expanded));
+        document.getElementById(toggle.getAttribute('aria-controls')).hidden = !expanded;
+        toggle.closest('.info-card').classList.toggle('is-expanded', expanded);
+        if (!expanded) return;
+        if (toggle.getAttribute('aria-controls') === 'cricket-content') loadCricket();
+        else loadNews();
+      });
+    });
+    loadCricket();
+    setInterval(() => { if (!document.hidden) loadCricket(true); }, 2 * 60 * 1000);
   </script>
 </body>
 </html>
